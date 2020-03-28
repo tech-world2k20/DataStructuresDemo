@@ -1,10 +1,8 @@
 package SLL;
 
-import java.util.EmptyStackException;
-
 public class SLinkedList {
 
-	private SllNode sllHeadNode;
+	private SllNode headNode;
 	int size;
 
 	public int getSize(SllNode head) {
@@ -18,7 +16,7 @@ public class SLinkedList {
 	}
 
 	public void printList() {
-		SllNode tempNode = sllHeadNode;
+		SllNode tempNode = headNode;
 		System.out.print("Head -> ");
 		while (tempNode != null) {
 			System.out.print(tempNode.getData()+" -> ");
@@ -30,10 +28,10 @@ public class SLinkedList {
 	public void insertNodeAtEnd(int data) {
 		size++;
 		SllNode newNode = new SllNode(data);
-		if(sllHeadNode == null) sllHeadNode = newNode;
+		if(headNode == null) headNode = newNode;
 
 		else 
-			traverseTillEnd(sllHeadNode).setNext(newNode);
+			traverseTillEnd(headNode).setNext(newNode);
 	}
 
 	private SllNode traverseTillEnd(SllNode node) {
@@ -47,8 +45,8 @@ public class SLinkedList {
 	public void insertNodeAtFront(int i) {
 		size++;
 		SllNode tempNode = new SllNode(i);
-		tempNode.setNext(sllHeadNode);
-		sllHeadNode = tempNode;	
+		tempNode.setNext(headNode);
+		headNode = tempNode;	
 	}
 
 	public void insertAtPost(int data, int pos) {
@@ -56,9 +54,9 @@ public class SLinkedList {
 	}
 
 	public void deleteFromFront() {
-		if(sllHeadNode == null) return;
-		SllNode tempNode = sllHeadNode;
-		sllHeadNode = tempNode.getNext();
+		if(headNode == null) return;
+		SllNode tempNode = headNode;
+		headNode = tempNode.getNext();
 		tempNode = null;
 		size--;
 	}
@@ -71,11 +69,11 @@ public class SLinkedList {
 				e.printStackTrace();
 			}
 		if(size == 1) { 
-			sllHeadNode = null;
+			headNode = null;
 			return;
 		}
 		SllNode prevToLastNode = null;
-		SllNode lastNode = sllHeadNode;
+		SllNode lastNode = headNode;
 		while(lastNode.getNext() != null) {
 			prevToLastNode = lastNode;
 			lastNode = lastNode.getNext();
@@ -84,8 +82,57 @@ public class SLinkedList {
 		size--;
 	}
 	
+	public void createLoop() {
+		SllNode tempNode = headNode;
+		int count=4;
+		while (tempNode.getNext() != null) {
+			tempNode = tempNode.getNext();
+		}
+		SllNode lastNode  = tempNode;
+		tempNode = headNode;
+		while (count > 1) {
+			tempNode = tempNode.getNext();
+			count--;
+		}
+		lastNode.setNext(tempNode);
+	}
+	
 
 	public Boolean isEmpty() {
-		return sllHeadNode == null;
+		return headNode == null;
+	}
+
+	public boolean checkLoopExist() {
+		if(headNode == null) return false;
+        boolean result=false;
+        SllNode sPtr=headNode;
+        SllNode fPtr=headNode;
+        while(fPtr != null && fPtr.getNext() != null){
+            sPtr = sPtr.getNext();
+            fPtr = fPtr.getNext().getNext();
+            if(sPtr == fPtr){
+                result = true;
+                break;
+            }
+        }
+        return result;
+		
+	}
+
+	public int findLoopNode() {
+        SllNode sPtr=headNode;
+        SllNode fPtr=headNode;
+        while(fPtr != null && fPtr.getNext() != null){
+            sPtr = sPtr.getNext();
+            fPtr = fPtr.getNext().getNext();
+            if(sPtr == fPtr) break;            
+        }
+        fPtr = headNode;
+        while (sPtr != fPtr) {
+			sPtr = sPtr.getNext();
+			fPtr = fPtr.getNext();
+		}
+        return sPtr.getData();
+		
 	}
 }
