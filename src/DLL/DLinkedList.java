@@ -20,12 +20,17 @@ public class DLinkedList {
 	public void insertAtEnd(int i) {
 		size++;
 		DllNode tempNode = new DllNode(i);
-		DllNode curNode = headNode;
-		while (curNode.getNext() != null) {
-			curNode = curNode.getNext();
+		if(headNode == null)
+			headNode = tempNode;
+		else {
+
+			DllNode curNode = headNode;
+			while (curNode.getNext() != null) {
+				curNode = curNode.getNext();
+			}
+			curNode.setNext(tempNode);
+			tempNode.setPrevious(curNode);
 		}
-		curNode.setNext(tempNode);
-		tempNode.setPrevious(curNode);
 	}
 	
 	public boolean isEmpty() {
@@ -66,10 +71,12 @@ public class DLinkedList {
 
 	}
 
-	public void deleteNodeAtPos(int pos) {
-		if(pos > size || pos < 0) return;
+	public int deleteNodeAtPos(int pos) {
+		if(pos > size || pos < 0) {};
 		size--;
+		int removedVal;
 		if(pos == 1) {
+			removedVal = headNode.getData();
 			headNode = headNode.getNext();
 			headNode.setPrevious(null);
 		}
@@ -84,8 +91,9 @@ public class DLinkedList {
 			DllNode laterNode = currNode.getNext();
 			prevNode.setNext(laterNode);
 			if(laterNode != null) laterNode.setPrevious(prevNode);
-			currNode = null;
+			removedVal = currNode.getData();
 		}
+		return removedVal;
 		
 	}
 

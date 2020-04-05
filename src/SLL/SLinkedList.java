@@ -14,6 +14,16 @@ public class SLinkedList {
 		}
 		return len;
 	}
+	
+	public int getSize() {
+		int len=0;
+		SllNode currNode = headNode;
+		while (currNode != null) {
+			len++;
+			currNode = currNode.getNext();
+		}
+		return len;
+	}
 
 	public void printList() {
 		SllNode tempNode = headNode;
@@ -53,12 +63,13 @@ public class SLinkedList {
 
 	}
 
-	public void deleteFromFront() {
-		if(headNode == null) return;
+	public int deleteFromFront() {
+		if(headNode == null) ;
 		SllNode tempNode = headNode;
 		headNode = tempNode.getNext();
-		tempNode = null;
 		size--;
+		
+		return tempNode.getData();
 	}
 
 	public void deleteFromEnd() {

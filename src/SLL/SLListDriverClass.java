@@ -38,8 +38,7 @@ public class SLListDriverClass {
 		list.createLoop();
 		System.out.println(list.checkLoopExist());
 		System.out.println(list.findLoopNode());
-		list.printList();
-		
+//		list.printList();
 		
 	}
 	
