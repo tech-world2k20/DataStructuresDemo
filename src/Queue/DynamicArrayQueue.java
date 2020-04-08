@@ -8,7 +8,7 @@ public class DynamicArrayQueue {
 	private int capacity;
 	private int[] array;
 	
-	private DynamicArrayQueue() {
+	public DynamicArrayQueue() {
 		capacity = 1;
 		front=-1;
 		rear=-1;
