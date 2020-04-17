@@ -1,31 +1,50 @@
 package stackProblems;
 
-import DLL.DLinkedList;
-
 public class maxSumSlidingWindow {
 
-	public static int method(int[] arr, int w) {
-		if(w > arr.length) {
-			System.out.println("invalid size"); return -1;
-		}
-		DLinkedList list = new DLinkedList();
-		int maxOf3=0;
-		for (int i = 0; i < w; i++) { 
-			if(maxOf3 < arr[i]) maxOf3=arr[i];
-			list.insertAtEnd(arr[i]);
-		}
-		for (int i =w ; i < arr.length; i++) {
-			int removedValue = list.deleteNodeAtPos(1);
-			list.insertAtEnd(arr[i]);
-			maxOf3 = (removedValue > arr[i]? (removedValue > maxOf3? removedValue:maxOf3):arr[i]);
-		}
-		list.printDLL();
-		
-		return maxOf3;
-	}
+	static void printKMax(int a[], int n, int k) 
+	{ 
+	    // If k = 1, print all elements 
+	    if (k == 1) { 
+	        for (int i = 0; i < n; i += 1) 
+	            System.out.print(a[i]+ " "); 
+	        return; 
+	    } 
+	   
+	    // Using p and q as variable pointers 
+	    // where p iterates through the subarray 
+	    // and q marks end of the subarray. 
+	    int p = 0, 
+	        q = k - 1, 
+	        t = p, 
+	        max = a[k - 1]; 
+	   
+	    // Iterating through subarray. 
+	    while (q <= n - 1) { 
+	   
+	        // Finding max 
+	        // from the subarray. 
+	        if (a[p] > max) 
+	            max = a[p]; 
+	   
+	        p += 1; 
+	   
+	        // Printing max of subarray and shifting pointers to next index. 
+	        if (q == p && p != n) { 
+	            System.out.print(max+ " "); 
+	            q++; 
+	            p = ++t; 
+	   
+	            if (q < n) 
+	                max = a[q]; 
+	        } 
+	    } 
+	} 
+	   
 	public static void main(String[] args) {
 		int[] arr = {1,3,-1,-3,5,3,6,7};
-		System.out.println(method(arr, 2));
+		int k =3;
+		printKMax(arr, arr.length, k);
 	}
 
 }
