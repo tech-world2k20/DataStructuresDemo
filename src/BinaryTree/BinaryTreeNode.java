@@ -300,7 +300,7 @@ public class BinaryTreeNode {
 		else return (left!=null? left:right);
 	}
 	
-	int count=0;
+	private int count=0;
 	public BinaryTreeNode kthSmallestElement(BinaryTreeNode root, int k) {
 		if(root == null) return null;
 		

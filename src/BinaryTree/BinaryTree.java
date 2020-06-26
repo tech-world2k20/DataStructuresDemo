@@ -133,8 +133,10 @@ public class BinaryTree {
 		if(root == null) return -1;
 		root.sumOfAllRightLeaves(root);
 		return root.sumOfRightLeaves;
-		
 	}
 	
+	public boolean isEmpty() {
+		return root == null;
+	}
 	
 }

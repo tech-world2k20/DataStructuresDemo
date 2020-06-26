@@ -3,16 +3,22 @@ package Sorting;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
+import BinaryTree.BinaryTree;
+import Heap.HeapClass;
+
 public class SortingClass {
-	int[] dummyArr;
-	
-	public void BubbleSort(int[] arr) {
-		dummyArr = arr;
-		for (int i = dummyArr.length-1; i >=0; i--) 
+	int[] countArr;
+
+
+	public int[] BubbleSort(int[] arr) {
+		countArr = arr;
+		for (int i = countArr.length-1; i >=0; i--) 
 			for (int j = 0; j < i; j++) {
-				if(dummyArr[j] > dummyArr[j+1])
-					swap(dummyArr, j, j+1);
+				if(countArr[j] > countArr[j+1])
+					swap(countArr, j, j+1);
 			}
+		
+		return countArr;
 	}
 
 	public static void swap(int[] dummyArr, int i, int j) {
@@ -22,183 +28,241 @@ public class SortingClass {
 		dummyArr[i]= dummyArr[j];
 		dummyArr[j] = temp;
 	}
-	
-	public void SelectionSort(int[] arr) {
-		dummyArr = arr;
-		for (int i = 0; i < dummyArr.length-1; i++) {
+
+	public int[] SelectionSort(int[] arr) {
+		countArr = arr;
+		for (int i = 0; i < countArr.length-1; i++) {
 			int min=i, j;
-			for (j = i+1; j < dummyArr.length; j++) 
-				if(dummyArr[j] < dummyArr[min]) min =j;
-			
-			swap(dummyArr, min, i);
+			for (j = i+1; j < countArr.length; j++) 
+				if(countArr[j] < countArr[min]) min =j;
+
+			swap(countArr, min, i);
 		}
-	
-	}
-	
-	public  void printArray() {
-		for (int i : dummyArr) 
-			System.out.print(i +" ");
-		
-		System.out.println();
-	}
-	
-	public void InsertionSort(int[] arr) {
-		dummyArr = arr;
-		for (int firstUnsortedIndex = 1; firstUnsortedIndex < dummyArr.length; firstUnsortedIndex++) {
-			int newElement = dummyArr[firstUnsortedIndex];
-			int i;
-			for(i=firstUnsortedIndex; i>0 && dummyArr[i-1] > newElement; i--) {
-				dummyArr[i] = dummyArr[i-1];
-			}
-			dummyArr[i] = newElement;
-		}
-	}
-	
-	// 5 9 -2 4 0 -67 4 98 -1 
-	public void ShellSort(int[] arr) {
-		dummyArr = arr;
-		for(int gap= dummyArr.length/2; gap>0; gap /=2) {
-			
-			for (int i = gap; i < dummyArr.length; i++) {
-				int newElement = dummyArr[i];
-				int j=i;
-				
-				while (j>=gap && dummyArr[j-gap]>newElement) {
-					dummyArr[j] = dummyArr[j-gap];
-					j -=gap;
-				}
-				
-				dummyArr[j] = newElement;
-			}
-		}
+		return countArr;
 	}
 
-	
-	public void MergeSort(int[] arr, int start, int end) {
-		dummyArr = arr;
-		if(end-start < 2) return;
-		
-		int mid = (start+end)/2;
-		MergeSort(dummyArr, start, mid);
-		MergeSort(dummyArr, mid, end);
-		Merge(dummyArr, start, mid, end);
+	public  void printArray() {
+		for (int i : countArr) 
+			System.out.print(i +" ");
+
+		System.out.println();
 	}
-	
+
+	public int[] InsertionSort(int[] arr) {
+		countArr = arr;
+		for (int firstUnsortedIndex = 1; firstUnsortedIndex < countArr.length; firstUnsortedIndex++) {
+			int newElement = countArr[firstUnsortedIndex];
+			int i;
+			for(i=firstUnsortedIndex; i>0 && countArr[i-1] > newElement; i--) {
+				countArr[i] = countArr[i-1];
+			}
+			countArr[i] = newElement;
+		}
+		
+		return countArr;
+	}
+
+	// 5 9 -2 4 0 -67 4 98 -1 
+	public int[] ShellSort(int[] arr) {
+		countArr = arr;
+		for(int gap= countArr.length/2; gap>0; gap /=2) {
+
+			for (int i = gap; i < countArr.length; i++) {
+				int newElement = countArr[i];
+				int j=i;
+
+				while (j>=gap && countArr[j-gap]>newElement) {
+					countArr[j] = countArr[j-gap];
+					j -=gap;
+				}
+
+				countArr[j] = newElement;
+			}
+		}
+		return countArr;
+	}
+
+
+	public int[] MergeSort(int[] arr, int start, int end) {
+		countArr = arr;
+		if(end-start < 2) return null;
+
+		int mid = (start+end)/2;
+		MergeSort(countArr, start, mid);
+		MergeSort(countArr, mid, end);
+		Merge(countArr, start, mid, end);
+		
+		return countArr;
+	}
+
 	private void Merge(int[] arr, int start, int mid, int end) {
 		if(arr[mid-1] <= arr[mid]) return;
-		
+
 		int i= start;
 		int j= mid;
 		int tempIndex=0;
-		
+
 		int[] temp = new int[end-start];
-		
+
 		while (i< mid && j<end) 
 			temp[tempIndex++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
-		
-		System.arraycopy(arr, i, arr, start+tempIndex, mid-i);
-		System.arraycopy(temp, 0, arr, start, tempIndex);
-		
-		temp = null;
+
+			System.arraycopy(arr, i, arr, start+tempIndex, mid-i);
+			System.arraycopy(temp, 0, arr, start, tempIndex);
+
+			temp = null;
 	}
-	
-	public  void QuickSort(int[] arr, int start, int end) {
-		dummyArr = arr;
-		if(end-start < 2) return;
-		
-		int pivotIndex = partion(dummyArr, start, end);
+
+	public  int[] QuickSort(int[] arr, int start, int end) {
+		countArr = arr;
+		if(end-start < 2) return null;
+
+		int pivotIndex = partion(countArr, start, end);
 		QuickSort(arr, start, pivotIndex);
 		QuickSort(arr, pivotIndex+1, end);
 		
+		return countArr;
+
 	}
 
 	private int partion(int[] dummyArr, int start, int end) {
-		
+
 		int pivot = dummyArr[start];
 		int i= start;
 		int j= end;
-		
+
 		while (i<j) {
 			//empty loop body
 			while (i<j && dummyArr[--j] >= pivot);
-			
-				if(i<j) 
-					dummyArr[i] = dummyArr[j];
-				
+
+			if(i<j) 
+				dummyArr[i] = dummyArr[j];
+
 			//empty loop body	
-				while (i<j && dummyArr[++i] <= pivot);
-				
-					if(i<j)
-						dummyArr[j] = dummyArr[i];
-			
+			while (i<j && dummyArr[++i] <= pivot);
+
+			if(i<j)
+				dummyArr[j] = dummyArr[i];
+
 		}
 		dummyArr[j] = pivot;
 		return j;
 	}
-	
-	public void CountingSort(int[] arr, int min, int max) {
-		dummyArr = new int[max-min+1];
+
+	//not a in-place algorithm
+	public int[] CountingSort(int[] arr, int min, int max) {
+		countArr = new int[max-min+1];
 		for (int i = 0; i < arr.length; i++) 
-			dummyArr[arr[i]-min]++;
-		
+			countArr[arr[i]-min]++;
+
 		int j=0;
 		for (int i = min; i <=max; i++) {
-			while (dummyArr[i-min] >0) {   // you can directly decrement the value here only
+			while (countArr[i-min] >0) {   // you can directly decrement the value here only
 				arr[j++] = i;
-				dummyArr[i-min]--; 		//instead of doing separately here
+				countArr[i-min]--; 		//instead of doing separately here
 			}
 		}
-		for (int i : arr) {
-			System.out.print(i+" ");
-		}
+//		for (int i : arr) 
+//			System.out.print(i+" ");
+		
+		return arr;
 	}
-	
-	
 
-	public static void main(String args[]) {
+
+	public int[] CountingSortInPlace(int[] arr, int min,int max) {
+		int[] b = new int[arr.length];
+
+		countArr = new int[max-min+1];
+		for (int i = 0; i < arr.length; i++) 
+			countArr[arr[i]-min]++;
+
+		for (int i = 1; i < countArr.length; i++) 
+			countArr[i] += countArr[i-1]; 
+
+		for (int i = arr.length-1; i >=0; i--) 	
+			b[--countArr[arr[i]-min]] = arr[i];
+
+//		for (int i : b) 
+//			System.out.print(i+" ");
+		
+		return b;
+	}
+
+	public void HeapSort(int[] arr1) {
+		PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+		System.out.print("Final Array(HeapSort) :	      ");
+		for (int i = 0; i < arr1.length; i++) 
+			minHeap.add(arr1[i]);
+
+		while (!minHeap.isEmpty()) 
+			System.out.print(minHeap.poll()+" ");
+	}
+
+	public void TreeSort(int[] arr1) {
+		BinaryTree bt = new BinaryTree();
+		System.out.print("Final Array(TreeSort) :	     ");
+		for (int i : arr1) 
+			bt.insert(i);
+		
+		bt.inOrderTraversal();
+	}
+
+/*	public static void main(String args[]) {
 		SortingClass b = new SortingClass();
 		int arr[] = {5,9,-2,4,0,-67,4,98,-1};
 		System.out.print("initial array : 	      ");
 		for (int i : arr) {
 			System.out.print(i+" ");
 		}
-		
+
+		System.out.println();
+
+		//		b.BubbleSort(arr);
+		//		System.out.println();
+		//		System.out.print("final array(bubbleSort) :    ");
+		//		for (int i : res) 
+		//			System.out.print(i +" ");
+
+		//		b.SelectionSort(arr);
+		//		System.out.println();
+		//		System.out.print("final array(selectionSort) : ");
+		//		b.printArray();
+
+		//		b.InsertionSort(arr);
+		//		System.out.print("Final Array(InsertionSort) : ");
+		//		b.printArray();
+
+		//		b.ShellSort(arr);
+		//		System.out.print("Final Array(ShellnSort) : ");
+		//		b.printArray();
+
+		//		b.MergeSort(arr, 0, arr.length);
+		//		System.out.print("Final Array(MergeSort) :     ");
+		//		b.printArray();
+
+		//		b.QuickSort(arr, 0, arr.length);
+		//		System.out.print("Final Array(QuickSort) :     ");
+		//		b.printArray();
+
+		int[] arr1 = {2,5,9,8,2,8,7,10,4,3};
+		System.out.print("Initial Array : 		");
+		for (int i : arr1) 
+			System.out.print(i+" ");
 		System.out.println();
 		
-//		b.BubbleSort(arr);
-//		System.out.println();
-//		System.out.print("final array(bubbleSort) :    ");
-//		for (int i : res) 
-//			System.out.print(i +" ");
-		
-//		b.SelectionSort(arr);
-//		System.out.println();
-//		System.out.print("final array(selectionSort) : ");
-//		b.printArray();
+		// min 1, max=10
+		//		System.out.print("Final Array(CountingSort) :   ");
+		//		b.CountingSort(arr1, 1, 10);
 
-//		b.InsertionSort(arr);
-//		System.out.print("Final Array(InsertionSort) : ");
-//		b.printArray();
+		//		b.CountingSortInPlace(arr1, 1, 10);
+
+//			b.HeapSort(arr1);
 		
-//		b.ShellSort(arr);
-//		System.out.print("Final Array(ShellnSort) : ");
-//		b.printArray();
-		
-//		b.MergeSort(arr, 0, arr.length);
-//		System.out.print("Final Array(MergeSort) :     ");
-//		b.printArray();
-		
-//		b.QuickSort(arr, 0, arr.length);
-//		System.out.print("Final Array(QuickSort) :     ");
-//		b.printArray();
-		
-		int[] arr1 = {2,5,9,8,2,8,7,10,4,3};
-		// min -2, max=98
-		System.out.print("Final Array(CountingSort) :   ");
-		b.CountingSort(arr1, 1, 10);
-		
-		
+		b.TreeSort(arr);
+
+
+
 	}
+*/
 
-	
 }	

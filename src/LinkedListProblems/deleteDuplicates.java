@@ -23,15 +23,19 @@ public class deleteDuplicates {
 		SllNode heaNode = new SllNode(5);
 		SllNode node2 = new SllNode(2);
 		SllNode node3 = new SllNode(2);
+		SllNode node3a = new SllNode(2);
+		SllNode node3b = new SllNode(2);
 		SllNode node4 = new SllNode(4);
 		SllNode node5 = new SllNode(7);
 		heaNode.setNext(node2);
 		heaNode.getNext().setNext(node3);
-		heaNode.getNext().getNext().setNext(node4);
-		heaNode.getNext().getNext().getNext().setNext(node5);
+		heaNode.getNext().getNext().setNext(node3a);
+		heaNode.getNext().getNext().getNext().setNext(node3b);
+		heaNode.getNext().getNext().getNext().getNext().setNext(node3b);
+		heaNode.getNext().getNext().getNext().getNext().getNext().setNext(node4);
 		SllNode res =removeDuplicates(heaNode);
 		while (res != null) {
-			System.out.println(res.getData()+" ");
+			System.out.print(res.getData()+" ");
 			res  = res.getNext();
 		}
 		

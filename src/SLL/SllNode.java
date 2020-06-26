@@ -7,6 +7,7 @@ public class SllNode {
 
 	public SllNode(int data) {
 		this.data = data;
+		this.next = null;
 	}
 
 	public int getData() {

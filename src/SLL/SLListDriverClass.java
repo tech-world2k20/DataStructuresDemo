@@ -7,11 +7,11 @@ public class SLListDriverClass {
 		SLinkedList list = new SLinkedList();
 		
 		list.insertNodeAtEnd(5);
-		list.insertNodeAtEnd(7);
-		list.insertNodeAtEnd(9);
+		list.insertNodeAtEnd(87);
+		list.insertNodeAtEnd(92);
 		list.deleteFromEnd();
 		list.printList();
-		list.insertNodeAtFront(3);
+		list.insertNodeAtFront(53);
 		System.out.println(list.size);
 		list.printList();
 		
@@ -30,9 +30,9 @@ public class SLListDriverClass {
 //		list.deleteFromEnd();
 //		System.out.println(list.size);
 //		list.printList();
-		list.insertNodeAtFront(2);
-		list.insertNodeAtEnd(13);
-		list.insertNodeAtEnd(15);
+		list.insertNodeAtFront(02);
+		list.insertNodeAtEnd(113);
+		list.insertNodeAtEnd(9);
 		list.insertNodeAtEnd(19);
 		list.printList(); //Head -> 2 -> 3 -> 5 -> 7 -> 13 -> 15 -> 19 -> Null
 		list.createLoop();

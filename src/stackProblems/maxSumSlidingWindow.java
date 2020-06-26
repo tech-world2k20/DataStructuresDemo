@@ -1,5 +1,9 @@
 package stackProblems;
 
+/**
+ * @author Motto
+ *
+ */
 public class maxSumSlidingWindow {
 
 	static void printKMax(int a[], int n, int k) 
